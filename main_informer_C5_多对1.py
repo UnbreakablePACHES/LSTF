@@ -29,11 +29,11 @@ pd.set_option('display.max_rows', None)  #显示完整的行
 def get_true_data(sheet_name,true_file,arg):
     data = pd.read_excel(true_file, sheet_name=sheet_name)
     if args.features != 'M':
-        data["{}".format(arg.target)] = round(data["{}".format(arg.target)], 1)
+        data["{}".format(arg.target)] = round(data["{}".format(arg.target)], 8)
     if args.features == 'M':
         data_columns = data.columns.values.tolist()
         for i in range(args.c_out):
-            data[data_columns[i + 1]] = round(data[data_columns[i + 1]], 1)
+            data[data_columns[i + 1]] = round(data[data_columns[i + 1]], 8)
     return data
 
 def initialize_parameter():
@@ -41,8 +41,8 @@ def initialize_parameter():
     parser.add_argument('--root_path', type=str, default='./data/C5/', help='数据文件的根路径（root path of the data file）')
     # parser.add_argument('--root_path', type=str, default='./data/ETT/', help='数据文件的根路径（root path of the data file）')
     # parser.add_argument('--data_path', type=str, default='ETTh1.csv', help='data file')
-    parser.add_argument('--target', type=str, default='NH3', help='S或MS任务中的目标特征列名（target feature in S or MS task）')
-    parser.add_argument('--freq', type=str, default='15t', help='时间特征编码的频率（freq for time features encoding）, '
+    parser.add_argument('--target', type=str, default='Return', help='S或MS任务中的目标特征列名（target feature in S or MS task）')
+    parser.add_argument('--freq', type=str, default='1b', help='时间特征编码的频率（freq for time features encoding）, '
                                                               '选项（options）:[s:secondly, t:minutely, h:hourly, d:daily, b:工作日（business days）, w:weekly, m:monthly], '
                                                               '你也可以使用更详细的频率，比如15分钟或3小时（you can also use more detailed freq like 15min or 3h）')
     parser.add_argument('--checkpoints', type=str, default='./checkpoints/',
@@ -51,12 +51,12 @@ def initialize_parameter():
     parser.add_argument('--enc_in', type=int, default=1, help='编码器输入大小（encoder input size）')
     parser.add_argument('--dec_in', type=int, default=1, help='解码器输入大小（decoder input size）')
     parser.add_argument('--c_out', type=int, default=1, help='输出尺寸（output size）')
-    parser.add_argument('--d_model', type=int, default=16, help='模型维数（dimension of model）默认是512-------------------------模型维数')
+    parser.add_argument('--d_model', type=int, default=8, help='模型维数（dimension of model）默认是512-------------------------模型维数')
     parser.add_argument('--n_heads', type=int, default=8, help='（num of heads）multi-head self-attention的head数')
     parser.add_argument('--e_layers', type=int, default=2, help='编码器层数（num of encoder layers）-------------------编码器层数')
     parser.add_argument('--d_layers', type=int, default=1, help='解码器层数（num of decoder layers）---------------------解码器层数')
     parser.add_argument('--s_layers', type=str, default='3,2,1', help='堆栈编码器层数（num of stack encoder layers）---------------堆栈编码器层数')
-    parser.add_argument('--d_ff', type=int, default=64, help='fcn维度（dimension of fcn），默认是2048--------------------FCN维度')
+    parser.add_argument('--d_ff', type=int, default=8, help='fcn维度（dimension of fcn），默认是2048--------------------FCN维度')
     """
     预测未来短期时间1~3个月的时候，d_model和d_ff进行设置的小，如16、32或者16,16；
     预测未来短期时间4个月及以上的时候，d_model和d_ff进行设置的稍微大一点点，如16、64或者32,64；32,128。
@@ -105,11 +105,11 @@ def initialize_parameter():
     parser.add_argument('--save_model_choos', type=bool, default=False, help='是否保存模型，不保存的话不占用IO')
     parser.add_argument('--is_show_label', type=bool, default=False, help='是否显示图例数值')
     # seq_len其实就是n个滑动窗口的大小，pred_len就是一个滑动窗口的大小
-    parser.add_argument('--seq_len', type=int, default=96,
+    parser.add_argument('--seq_len', type=int, default=50,
                         help='Informer编码器的输入序列长度（input sequence length of Informer encoder）原始默认为96------------------------编码器输入序列长度seq_len')
     parser.add_argument('--label_len', type=int, default=48,
                         help='inform解码器的开始令牌长度（start token length of Informer decoder），原始默认为48-------------------------解码器的开始令牌起始位置label_len')
-    parser.add_argument('--pred_len', type=int, default=76, help='预测序列长度（prediction sequence length）原始默认为24------------------预测序列长度pred_len')
+    parser.add_argument('--pred_len', type=int, default=30, help='预测序列长度（prediction sequence length）原始默认为24------------------预测序列长度pred_len')
     # pred_len就是要预测的序列长度（要预测未来多少个时刻的数据），也就是Decoder中置零的那部分的长度
     parser.add_argument('--dropout', type=float, default=0.1,
                         help='dropout，长序列预测用0.5，短期预测用0.05~0.2(一般是0.05)，如果shuffle_flag的训练部分为True，那么该值直接设置为0;模型参数多设置为0.5，要在0.5范围内；视情况而定。----')
@@ -121,7 +121,7 @@ def initialize_parameter():
     parser.add_argument('--random_choos', type=bool, default=True, help='random seed 随机数种子，是否随机，为True一般用于多次实验')
     parser.add_argument('--sub_them', type=str, default='4变量多对一', help='单次运行的存储文件夹字后面的内容--------------------存储数据父文件夹名字')
     # parser.add_argument('--sub_them', type=str, default='月度', help='单次运行的存储文件夹的月字后面的内容--------------------存储数据父文件夹名字')
-    parser.add_argument('--true_sheetname', type=str, default='11日', help='真实值的月份名称,execl文件的sheetname--------------------------真实值的月份数值')
+    parser.add_argument('--true_sheetname', type=str, default='eem_true', help='真实值的月份名称,execl文件的sheetname--------------------------真实值的月份数值')
     # parser.add_argument('--true_price', type=str, default='7月第二第三周', help='真实值的月份名称,execl文件的sheetname--------------------------真实值的月份数值')
     # parser.add_argument('--true_price', type=str, default='1-6月', help='真实值的月份名称,execl文件的sheetname--------------------------真实值的月份数值')
     parser.add_argument('--model', type=str, required=False, default='informer',
@@ -134,12 +134,12 @@ def initialize_parameter():
     # parser.add_argument('--true_file', type=str, required=False, default='./TrueValue/月粒度实验的真实价格.xls', help='真实值数据的文件名')
     # parser.add_argument('--true_file', type=str, required=False, default='./TrueValue/日粒度实验的真实价格.xls', help='真实值数据的文件名')
     # parser.add_argument('--true_file', type=str, required=False, default='./TrueValue/日粒度与月粒度对比实验的真实价格.xls', help='真实值数据的文件名')
-    parser.add_argument('--true_file', type=str, required=False, default='./TrueValue/C5真实值.xls', help='真实值数据的文件名')
+    parser.add_argument('--true_file', type=str, required=False, default='./TrueValue/eem_true.csv', help='真实值数据的文件名')
 
     # parser.add_argument('--data_path', type=str, default='周粒度-多特征数据汇总.csv', help='data file')
     parser.add_argument('--data_path', type=str, default='C5_data.csv', help='data file')
 
-    parser.add_argument('--columns', type=list, required=False, default=["date",'NH3'], help='存储预测数据的时候的列名，多对多M')
+    parser.add_argument('--columns', type=list, required=False, default=["date",'Return'], help='存储预测数据的时候的列名，多对多M')
     # parser.add_argument('--columns', type=list, required=False, default=["time", 'GZ_maize_prince','CD_maize_price','CD_SBM_price','ZJ_SBM_prince','price'], help='存储预测数据的时候的列名，多对一MS、一对一S任务')
     # parser.add_argument('--shuffle_flag_train', type=str, required=False, default=True, help='训练的时候是否打乱数据[未完成该定义]')
     parser.add_argument('--features', type=str, default='MS', help='预测任务选项（forecasting task, options）:[M, S, MS]; '
@@ -220,7 +220,7 @@ if __name__ == '__main__':
         'ECL': {'data': 'ECL.csv', 'T': 'MT_320', 'M': [321, 321, 321], 'S': [1, 1, 1], 'MS': [321, 321, 1]},
         'Solar': {'data': 'solar_AL.csv', 'T': 'POWER_136', 'M': [137, 137, 137], 'S': [1, 1, 1], 'MS': [137, 137, 1]},
         'Time_data': {'data': 'most_samll_test_3个变量.csv', 'T': 'X3', 'M': [3, 3, 3], 'S': [1, 1, 1], 'MS': [3, 3, 1]},
-        'C5': {'data': 'C5_data.csv', 'T': 'NH3', 'M': [4, 4, 4], 'S': [1, 1, 1], 'MS': [4, 4, 1]},
+        'C5': {'data': 'C5_data.csv', 'T': 'Return', 'M': [4, 4, 4], 'S': [1, 1, 1], 'MS': [7, 7, 1]},
     }
     # 判断在parser中定义的数据主题是否在解析器中
     if args.data in data_parser.keys():
@@ -425,10 +425,10 @@ if __name__ == '__main__':
             # 处理test_true
 
             for i in range(args.c_out):
-                df_dict[args.columns[i+1]] = [round(f,1) for f in future_pred[:,i].flatten().tolist()]
-                df_dict2[args.columns[i+1]] = [round(f,1) for f in test_pred[:,i].flatten().tolist()]
+                df_dict[args.columns[i+1]] = [round(f,8) for f in future_pred[:,i].flatten().tolist()]
+                df_dict2[args.columns[i+1]] = [round(f,8) for f in test_pred[:,i].flatten().tolist()]
                 # 存储预测结果到字典
-                data_dict["实验{}_{}".format(ii + 1,args.columns[i+1])] = [round(f,1) for f in future_pred[:,i].flatten().tolist()]
+                data_dict["实验{}_{}".format(ii + 1,args.columns[i+1])] = [round(f,8) for f in future_pred[:,i].flatten().tolist()]
                 # 添加字段名字
                 df_columns.append("实验{}_{}".format(ii + 1,args.columns[i+1]))
 
@@ -437,7 +437,7 @@ if __name__ == '__main__':
                 # print('true_{}'.format(args.columns[i+1]),"\t",test_true[:,i])
                 # sys.exit()
                 # 存储预测结果到字典
-                test_dict["实验{}_{}".format(ii + 1,args.columns[i+1])] = [round(f,1) for f in test_pred[:,i].flatten().tolist()]
+                test_dict["实验{}_{}".format(ii + 1,args.columns[i+1])] = [round(f,8) for f in test_pred[:,i].flatten().tolist()]
                 test_columns.append("实验{}_{}".format(ii + 1, args.columns[i + 1]))
             #--------------------------------------------------
             df = pd.DataFrame(data=df_dict, columns=args.columns)
@@ -510,12 +510,12 @@ if __name__ == '__main__':
         df["pred_mean_{}".format(args.target)] = df[df_columns].mean(axis=1)
         df_columns.insert(0, 'pred_mean_{}'.format(args.target))
         df_columns.insert(0, 'true')
-        df["pred_mean_{}".format(args.target)] = round(df["pred_mean_{}".format(args.target)], 1)
+        df["pred_mean_{}".format(args.target)] = round(df["pred_mean_{}".format(args.target)], 8)
 
         df_test["pred_mean_{}".format(args.target)] = df_test[test_columns].mean(axis=1)
         test_columns.insert(0, 'pred_mean_{}'.format(args.target))
         test_columns.insert(0, 'true')
-        df_test["pred_mean_{}".format(args.target)] = round(df_test["pred_mean_{}".format(args.target)], 1)
+        df_test["pred_mean_{}".format(args.target)] = round(df_test["pred_mean_{}".format(args.target)], 8)
 
     if args.features == 'M':
         for i in range(args.c_out):
@@ -528,10 +528,12 @@ if __name__ == '__main__':
             test_columns.insert(0, list(data_dict.keys())[i])
 
     df_columns.insert(0, 'date')
+    print(df)
+    df.to_csv(os.path.join(run_name_dir, "{}次实验_{}未来预测结果.csv".format(args.itr, args.true_sheetname)), index=False, encoding='utf-8',sep=',')
     df = df[df_columns]
     df = calculate_var(df,args)
     print("--------"*3)
-    df.iloc[:,1:] = df.iloc[:,1:].round(1)
+    df.iloc[:,1:] = df.iloc[:,1:].round(8)
     df.to_csv(os.path.join(run_name_dir, "{}次实验_{}未来预测结果.csv".format(args.itr, args.true_sheetname)), index=False, encoding='utf-8',sep=',')
 
     # -------------------------------------
@@ -541,7 +543,7 @@ if __name__ == '__main__':
     # sys.exit()
     df_test = calculate_var(df_test, args)
     # print("--------" * 3)
-    df.iloc[:, 1:] = df.iloc[:, 1:].round(1)
+    df.iloc[:, 1:] = df.iloc[:, 1:].round(8)
     df_test.to_csv(os.path.join(run_name_dir, "{}次实验_{}测试集预测结果.csv".format(args.itr, args.true_sheetname)), index=False,encoding='utf-8', sep=',')
 
     try:

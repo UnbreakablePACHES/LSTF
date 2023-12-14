@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Awesome-pyecharts</title>
+                <script type="text/javascript" src="https://assets.pyecharts.org/assets/v5/echarts.min.js"></script>
+            <script type="text/javascript" src="https://assets.pyecharts.org/assets/v5/themes/shine.js"></script>
+
+</head>
+<body >
+    <div id="d96bf737c54e4cb6a9d8cc2c77546037" class="chart-container" style="width:900px; height:500px; "></div>
+    <script>
+        var chart_d96bf737c54e4cb6a9d8cc2c77546037 = echarts.init(
+            document.getElementById('d96bf737c54e4cb6a9d8cc2c77546037'), 'shine', {renderer: 'canvas'});
+        var option_d96bf737c54e4cb6a9d8cc2c77546037 = {
+    "animation": true,
+    "animationThreshold": 2000,
+    "animationDuration": 1000,
+    "animationEasing": "cubicOut",
+    "animationDelay": 0,
+    "animationDurationUpdate": 300,
+    "animationEasingUpdate": "cubicOut",
+    "animationDelayUpdate": 0,
+    "aria": {
+        "enabled": false
+    },
+    "series": [
+        {
+            "type": "line",
+            "name": "train_loss",
+            "connectNulls": false,
+            "xAxisIndex": 0,
+            "symbolSize": 4,
+            "showSymbol": true,
+            "smooth": true,
+            "clip": true,
+            "step": false,
+            "data": [
+                [
+                    1,
+                    0.0222308
+                ],
+                [
+                    2,
+                    0.01353451
+                ],
+                [
+                    3,
+                    0.00921641
+                ],
+                [
+                    4,
+                    0.0085436
+                ],
+                [
+                    5,
+                    0.00783937
+                ],
+                [
+                    6,
+                    0.00765052
+                ],
+                [
+                    7,
+                    0.00747042
+                ],
+                [
+                    8,
+                    0.00751047
+                ],
+                [
+                    9,
+                    0.0074503
+                ],
+                [
+                    10,
+                    0.00758039
+                ],
+                [
+                    11,
+                    0.00740234
+                ],
+                [
+                    12,
+                    0.00736442
+                ],
+                [
+                    13,
+                    0.00751217
+                ],
+                [
+                    14,
+                    0.00757847
+                ],
+                [
+                    15,
+                    0.00737696
+                ],
+                [
+                    16,
+                    0.00742103
+                ],
+                [
+                    17,
+                    0.00731054
+                ],
+                [
+                    18,
+                    0.00757999
+                ],
+                [
+                    19,
+                    0.00736381
+                ],
+                [
+                    20,
+                    0.00739501
+                ],
+                [
+                    21,
+                    0.00746589
+                ],
+                [
+                    22,
+                    0.00730407
+                ],
+                [
+                    23,
+                    0.00733667
+                ],
+                [
+                    24,
+                    0.00754415
+                ],
+                [
+                    25,
+                    0.00732677
+                ],
+                [
+                    26,
+                    0.007453
+                ],
+                [
+                    27,
+                    0.00727998
+                ],
+                [
+                    28,
+                    0.00734997
+                ],
+                [
+                    29,
+                    0.00750669
+                ],
+                [
+                    30,
+                    0.00737877
+                ],
+                [
+                    31,
+                    0.00742977
+                ],
+                [
+                    32,
+                    0.00759249
+                ],
+                [
+                    33,
+                    0.00752975
+                ],
+                [
+                    34,
+                    0.00749523
+                ]
+            ],
+            "hoverAnimation": true,
+            "label": {
+                "show": false,
+                "margin": 8
+            },
+            "logBase": 10,
+            "seriesLayoutBy": "column",
+            "lineStyle": {
+                "show": true,
+                "width": 1,
+                "opacity": 1,
+                "curveness": 0,
+                "type": "solid"
+            },
+            "areaStyle": {
+                "opacity": 0
+            },
+            "markPoint": {
+                "label": {
+                    "show": true,
+                    "position": "inside",
+                    "color": "#fff",
+                    "margin": 8
+                },
+                "data": [
+                    {
+                        "type": "min"
+                    },
+                    {
+                        "type": "average"
+                    }
+                ]
+            },
+            "zlevel": 0,
+            "z": 0
+        },
+        {
+            "type": "line",
+            "name": "val_loss",
+            "connectNulls": false,
+            "xAxisIndex": 0,
+            "symbolSize": 4,
+            "showSymbol": true,
+            "smooth": true,
+            "clip": true,
+            "step": false,
+            "data": [
+                [
+                    1,
+                    0.0055680000223219395
+                ],
+                [
+                    2,
+                    0.0035147699527442455
+                ],
+                [
+                    3,
+                    0.002690220018848777
+                ],
+                [
+                    4,
+                    0.0026161600835621357
+                ],
+                [
+                    5,
+                    0.002586809918284416
+                ],
+                [
+                    6,
+                    0.0025196298956871033
+                ],
+                [
+                    7,
+                    0.0025533800944685936
+                ],
+                [
+                    8,
+                    0.002557730069383979
+                ],
+                [
+                    9,
+                    0.0025498599279671907
+                ],
+                [
+                    10,
+                    0.002552510006353259
+                ],
+                [
+                    11,
+                    0.0026287001091986895
+                ],
+                [
+                    12,
+                    0.0025189900770783424
+                ],
+                [
+                    13,
+                    0.0026260099839419127
+                ],
+                [
+                    14,
+                    0.0025315999519079924
+                ],
+                [
+                    15,
+                    0.002573810052126646
+                ],
+                [
+                    16,
+                    0.002560290042310953
+                ],
+                [
+                    17,
+                    0.002486970042809844
+                ],
+                [
+                    18,
+                    0.0024749699514359236
+                ],
+                [
+                    19,
+                    0.0026407300028949976
+                ],
+                [
+                    20,
+                    0.0026206800248473883
+                ],
+                [
+                    21,
+                    0.0025194899644702673
+                ],
+                [
+                    22,
+                    0.0025420000310987234
+                ],
+                [
+                    23,
+                    0.0025780899450182915
+                ],
+                [
+                    24,
+                    0.0024642900098115206
+                ],
+                [
+                    25,
+                    0.0025382100138813257
+                ],
+                [
+                    26,
+                    0.0025698801036924124
+                ],
+                [
+                    27,
+                    0.0025524499360471964
+                ],
+                [
+                    28,
+                    0.002621870022267103
+                ],
+                [
+                    29,
+                    0.0025837700814008713
+                ],
+                [
+                    30,
+                    0.0025617300998419523
+                ],
+                [
+                    31,
+                    0.0025607100687921047
+                ],
+                [
+                    32,
+                    0.00258627999573946
+                ],
+                [
+                    33,
+                    0.0025549300480633974
+                ],
+                [
+                    34,
+                    0.0025178699288517237
+                ]
+            ],
+            "hoverAnimation": true,
+            "label": {
+                "show": false,
+                "margin": 8
+            },
+            "logBase": 10,
+            "seriesLayoutBy": "column",
+            "lineStyle": {
+                "show": true,
+                "width": 1,
+                "opacity": 1,
+                "curveness": 0,
+                "type": "solid"
+            },
+            "areaStyle": {
+                "opacity": 0
+            },
+            "markPoint": {
+                "label": {
+                    "show": true,
+                    "position": "inside",
+                    "color": "#fff",
+                    "margin": 8
+                },
+                "data": [
+                    {
+                        "type": "min"
+                    },
+                    {
+                        "type": "average"
+                    }
+                ]
+            },
+            "zlevel": 0,
+            "z": 0
+        },
+        {
+            "type": "line",
+            "name": "test_loss",
+            "connectNulls": false,
+            "xAxisIndex": 0,
+            "symbolSize": 4,
+            "showSymbol": true,
+            "smooth": true,
+            "clip": true,
+            "step": false,
+            "data": [
+                [
+                    1,
+                    0.009385489858686924
+                ],
+                [
+                    2,
+                    0.007481509819626808
+                ],
+                [
+                    3,
+                    0.006529150065034628
+                ],
+                [
+                    4,
+                    0.006413990166038275
+                ],
+                [
+                    5,
+                    0.006473400164395571
+                ],
+                [
+                    6,
+                    0.006482759956270456
+                ],
+                [
+                    7,
+                    0.006367790047079325
+                ],
+                [
+                    8,
+                    0.006483979988843203
+                ],
+                [
+                    9,
+                    0.006371799856424332
+                ],
+                [
+                    10,
+                    0.006306590046733618
+                ],
+                [
+                    11,
+                    0.006406070198863745
+                ],
+                [
+                    12,
+                    0.006449549924582243
+                ],
+                [
+                    13,
+                    0.006538049783557653
+                ],
+                [
+                    14,
+                    0.006347250193357468
+                ],
+                [
+                    15,
+                    0.006467880215495825
+                ],
+                [
+                    16,
+                    0.006428089924156666
+                ],
+                [
+                    17,
+                    0.006440610159188509
+                ],
+                [
+                    18,
+                    0.00646607019007206
+                ],
+                [
+                    19,
+                    0.006390899885445833
+                ],
+                [
+                    20,
+                    0.006444559898227453
+                ],
+                [
+                    21,
+                    0.006424230057746172
+                ],
+                [
+                    22,
+                    0.006521120201796293
+                ],
+                [
+                    23,
+                    0.006348299793899059
+                ],
+                [
+                    24,
+                    0.006480169948190451
+                ],
+                [
+                    25,
+                    0.006419280078262091
+                ],
+                [
+                    26,
+                    0.00650575989857316
+                ],
+                [
+                    27,
+                    0.006469139829277992
+                ],
+                [
+                    28,
+                    0.006443129852414131
+                ],
+                [
+                    29,
+                    0.00651144003495574
+                ],
+                [
+                    30,
+                    0.006386610213667154
+                ],
+                [
+                    31,
+                    0.006326649803668261
+                ],
+                [
+                    32,
+                    0.006395480129867792
+                ],
+                [
+                    33,
+                    0.006319459993392229
+                ],
+                [
+                    34,
+                    0.006520079914480448
+                ]
+            ],
+            "hoverAnimation": true,
+            "label": {
+                "show": false,
+                "margin": 8
+            },
+            "logBase": 10,
+            "seriesLayoutBy": "column",
+            "lineStyle": {
+                "show": true,
+                "width": 1,
+                "opacity": 1,
+                "curveness": 0,
+                "type": "solid"
+            },
+            "areaStyle": {
+                "opacity": 0
+            },
+            "markPoint": {
+                "label": {
+                    "show": true,
+                    "position": "inside",
+                    "color": "#fff",
+                    "margin": 8
+                },
+                "data": [
+                    {
+                        "type": "min"
+                    },
+                    {
+                        "type": "average"
+                    }
+                ]
+            },
+            "zlevel": 0,
+            "z": 0
+        }
+    ],
+    "legend": [
+        {
+            "data": [
+                "train_loss",
+                "val_loss",
+                "test_loss"
+            ],
+            "selected": {},
+            "show": true,
+            "right": "10%",
+            "padding": 5,
+            "itemGap": 10,
+            "itemWidth": 25,
+            "itemHeight": 14,
+            "backgroundColor": "transparent",
+            "borderColor": "#ccc",
+            "borderWidth": 1,
+            "borderRadius": 0,
+            "pageButtonItemGap": 5,
+            "pageButtonPosition": "end",
+            "pageFormatter": "{current}/{total}",
+            "pageIconColor": "#2f4554",
+            "pageIconInactiveColor": "#aaa",
+            "pageIconSize": 15,
+            "animationDurationUpdate": 800,
+            "selector": false,
+            "selectorPosition": "auto",
+            "selectorItemGap": 7,
+            "selectorButtonGap": 10
+        }
+    ],
+    "tooltip": {
+        "show": true,
+        "trigger": "item",
+        "triggerOn": "mousemove|click",
+        "axisPointer": {
+            "type": "line"
+        },
+        "showContent": true,
+        "alwaysShowContent": false,
+        "showDelay": 0,
+        "hideDelay": 100,
+        "enterable": false,
+        "confine": false,
+        "appendToBody": false,
+        "transitionDuration": 0.4,
+        "textStyle": {
+            "fontSize": 14
+        },
+        "borderWidth": 0,
+        "padding": 5,
+        "order": "seriesAsc"
+    },
+    "xAxis": [
+        {
+            "type": "category",
+            "name": "epoch",
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "gridIndex": 0,
+            "inverse": false,
+            "offset": 0,
+            "splitNumber": 5,
+            "minInterval": 0,
+            "splitLine": {
+                "show": true,
+                "lineStyle": {
+                    "show": true,
+                    "width": 1,
+                    "opacity": 1,
+                    "curveness": 0,
+                    "type": "solid"
+                }
+            },
+            "data": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34
+            ]
+        }
+    ],
+    "yAxis": [
+        {
+            "type": "value",
+            "name": "\u635f\u5931\u503c",
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "gridIndex": 0,
+            "axisTick": {
+                "show": true,
+                "alignWithLabel": false,
+                "inside": false
+            },
+            "inverse": false,
+            "offset": 0,
+            "splitNumber": 5,
+            "min": "dataMin",
+            "minInterval": 0,
+            "splitLine": {
+                "show": true,
+                "lineStyle": {
+                    "show": true,
+                    "width": 1,
+                    "opacity": 1,
+                    "curveness": 0,
+                    "type": "solid"
+                }
+            }
+        }
+    ],
+    "title": [
+        {
+            "show": true,
+            "text": "\u7b2c2\u6b21\u5b9e\u9a8c",
+            "target": "blank",
+            "subtarget": "blank",
+            "padding": 5,
+            "itemGap": 10,
+            "textAlign": "auto",
+            "textVerticalAlign": "auto",
+            "triggerEvent": false
+        }
+    ],
+    "dataZoom": {
+        "show": true,
+        "type": "slider",
+        "showDetail": true,
+        "showDataShadow": true,
+        "realtime": true,
+        "start": 20,
+        "end": 80,
+        "orient": "horizontal",
+        "zoomLock": false,
+        "filterMode": "filter"
+    }
+};
+        chart_d96bf737c54e4cb6a9d8cc2c77546037.setOption(option_d96bf737c54e4cb6a9d8cc2c77546037);
+    </script>
+</body>
+</html>

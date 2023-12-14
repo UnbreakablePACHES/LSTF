@@ -296,9 +296,9 @@ class Exp_Informer(Exp_Basic):
             # 测试集进行评估模型，其实这里也是达到验证的作用
             test_loss = self.vali(test_data, test_loader, criterion,args)
             # 添加到列表中留存
-            all_epoch_train_loss.append(float(round(train_loss,1)))
-            all_epoch_vali_loss.append(float(round(vali_loss,1)))
-            all_epoch_test_loss.append(float(round(test_loss,1)))
+            all_epoch_train_loss.append(float(round(train_loss,8)))
+            all_epoch_vali_loss.append(float(round(vali_loss,8)))
+            all_epoch_test_loss.append(float(round(test_loss,8)))
             # 完成每个epoch的训练就打印一次
             print("Epoch: {0}, Steps: {1} | Train Loss: {2:.7f} Vali Loss: {3:.7f} Test Loss: {4:.7f}".format(
                 epoch + 1, train_steps, train_loss, vali_loss, test_loss))
@@ -315,9 +315,9 @@ class Exp_Informer(Exp_Basic):
             # 下面是加载模型，（这个模型最终在预测完之后要删除，因为占用内存大）
             self.model.load_state_dict(torch.load(best_model_path))
         # 实验记录
-        info_dict["【训练】本次实验训练的train平均损失"] = round(float(np.mean(all_epoch_train_loss)),1)
-        info_dict["【验证】本次实验训练的vali平均损失"]  = round(float(np.mean(all_epoch_vali_loss)),1)
-        info_dict["【验证】本次实验训练的test平均损失"]  = round(float(np.mean(all_epoch_test_loss)),1)
+        info_dict["【训练】本次实验训练的train平均损失"] = round(float(np.mean(all_epoch_train_loss)),8)
+        info_dict["【验证】本次实验训练的vali平均损失"]  = round(float(np.mean(all_epoch_vali_loss)),8)
+        info_dict["【验证】本次实验训练的test平均损失"]  = round(float(np.mean(all_epoch_test_loss)),8)
         info_dict["----实际训练的epoch-------"] = epoch_count
 
         return self.model,info_dict,all_epoch_train_loss,all_epoch_vali_loss,all_epoch_test_loss,epoch_count
@@ -385,14 +385,14 @@ class Exp_Informer(Exp_Basic):
             preds = np.around(preds, decimals=1)
             trues = trues.tolist()
             preds = preds.tolist()
-            preds = [round(i, 1) for i in preds]
-            trues = [round(i, 1) for i in trues]
+            preds = [round(i, 8) for i in preds]
+            trues = [round(i, 8) for i in trues]
             preds = np.array(preds)
             trues = np.array(trues)
 
         # 评估指标：测试集评估模型
         mae,rmse,smape,r2,ad_r2 = metric(preds, trues)
-        mae, rmse, smape, r2, ad_r2 = round(float(mae),1),round(float(rmse),1),round(float(smape),1),round(float(r2),1),round(float(ad_r2),1)
+        mae, rmse, smape, r2, ad_r2 = round(float(mae),8),round(float(rmse),8),round(float(smape),8),round(float(r2),8),round(float(ad_r2),8)
         print('测试集评估结果：\t平均绝对误差 MAE:{}，均方根误差RMSE:{}，对称平均绝对百分比误差SMAPE:{}，决定系数R²：{}，校正R²:{} \n'.format(mae,rmse,smape,r2,ad_r2))
         # 存储评估指标
         info_dict["【评估】本次实验的test集平均绝对误差MAE"] = mae
@@ -464,7 +464,7 @@ class Exp_Informer(Exp_Basic):
         if args.features != 'M':
             # 这里要修改
             preds = preds.flatten().tolist()
-            preds = [round(i, 1) for i in preds]
+            preds = [round(i, 8) for i in preds]
             print("本次实验预测未来的结果：",preds)
             # 存储未来的预测结果到npy文件
             np.save(folder_path+'real_prediction.npy', preds)
